@@ -7,7 +7,7 @@ class Homeprovider extends ChangeNotifier
   Future<String> postapicall(serach)
   async {
     Apihelper apihelper=Apihelper();
-    String data=await apihelper.create(serach);
+    String data=await apihelper.trainapi(serach);
     notifyListeners();
     return data;
   }

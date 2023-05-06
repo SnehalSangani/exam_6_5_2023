@@ -1,6 +1,9 @@
 import 'package:exam_6_5_2023/screen/home/model/home_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/home_provider.dart';
 
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
@@ -12,8 +15,12 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   TextEditingController txtsearch=TextEditingController();
   List<Trainmodel> alldata=[];
+  Homeprovider? homeproviderTrue;
+  Homeprovider? homeproviderFalse;
   @override
   Widget build(BuildContext context) {
+    homeproviderTrue = Provider.of(context,listen: true);
+    homeproviderFalse = Provider.of(context,listen: false);
     return SafeArea(child: Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -32,10 +39,10 @@ class _homeState extends State<home> {
               ),
             ),
             SizedBox(height: 20,),
-            ElevatedButton(onPressed: () {
+            ElevatedButton(onPressed: () async {
               String search=txtsearch.text;
-              Trainmodel t1=Trainmodel(name: ,data: ,trainFrom: ,trainNum: ,trainTo: );
-              alldata.add(t1);
+              String? msg=await homeproviderFalse!.postapicall(search);
+              print('$msg');
 
             }, child: Text("Submit"),),
           ],
