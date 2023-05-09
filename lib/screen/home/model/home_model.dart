@@ -9,18 +9,18 @@ List<Trainmodel> trainmodelFromJson(String str) => List<Trainmodel>.from(json.de
 String trainmodelToJson(List<Trainmodel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Trainmodel {
-  int? trainNum;
-  String? name;
-  String? trainFrom;
-  String? trainTo;
-  Data? data;
+  int trainNum;
+  String name;
+  String trainFrom;
+  String trainTo;
+  Data data;
 
   Trainmodel({
-    this.trainNum,
-    this.name,
-    this.trainFrom,
-    this.trainTo,
-    this.data,
+    required this.trainNum,
+    required this.name,
+    required this.trainFrom,
+    required this.trainTo,
+    required this.data,
   });
 
   factory Trainmodel.fromJson(Map<String, dynamic> json) => Trainmodel(
@@ -28,7 +28,7 @@ class Trainmodel {
     name: json["name"],
     trainFrom: json["train_from"],
     trainTo: json["train_to"],
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    data: Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -36,34 +36,34 @@ class Trainmodel {
     "name": name,
     "train_from": trainFrom,
     "train_to": trainTo,
-    "data": data?.toJson(),
+    "data": data.toJson(),
   };
 }
 
 class Data {
-  String? id;
-  Days? days;
-  String? toId;
-  List<Class>? classes;
-  String? fromId;
-  String? arriveTime;
-  String? departTime;
+  String id;
+  Days days;
+  String toId;
+  List<Class> classes;
+  String fromId;
+  String arriveTime;
+  String departTime;
 
   Data({
-    this.id,
-    this.days,
-    this.toId,
-    this.classes,
-    this.fromId,
-    this.arriveTime,
-    this.departTime,
+    required this.id,
+    required this.days,
+    required this.toId,
+    required this.classes,
+    required this.fromId,
+    required this.arriveTime,
+    required this.departTime,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["id"],
-    days: json["days"] == null ? null : Days.fromJson(json["days"]),
+    days: Days.fromJson(json["days"]),
     toId: json["to_id"],
-    classes: json["classes"] == null ? [] : List<Class>.from(json["classes"]!.map((x) => classValues.map[x]!)),
+    classes: List<Class>.from(json["classes"].map((x) => classValues.map[x]!)),
     fromId: json["from_id"],
     arriveTime: json["arriveTime"],
     departTime: json["departTime"],
@@ -71,9 +71,9 @@ class Data {
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "days": days?.toJson(),
+    "days": days.toJson(),
     "to_id": toId,
-    "classes": classes == null ? [] : List<dynamic>.from(classes!.map((x) => classValues.reverse[x])),
+    "classes": List<dynamic>.from(classes.map((x) => classValues.reverse[x])),
     "from_id": fromId,
     "arriveTime": arriveTime,
     "departTime": departTime,
@@ -98,13 +98,13 @@ class Days {
   dynamic wed;
 
   Days({
-    this.fri,
-    this.mon,
-    this.sat,
-    this.sun,
-    this.thu,
-    this.tue,
-    this.wed,
+    required this.fri,
+    required this.mon,
+    required this.sat,
+    required this.sun,
+    required this.thu,
+    required this.tue,
+    required this.wed,
   });
 
   factory Days.fromJson(Map<String, dynamic> json) => Days(

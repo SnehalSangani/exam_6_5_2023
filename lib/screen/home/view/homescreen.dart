@@ -1,4 +1,5 @@
 import 'package:exam_6_5_2023/screen/home/model/home_model.dart';
+import 'package:exam_6_5_2023/utils/api_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,10 +18,20 @@ class _homeState extends State<home> {
   List<Trainmodel> alldata=[];
   Homeprovider? homeproviderTrue;
   Homeprovider? homeproviderFalse;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<Homeprovider>(context,listen: false).postApi('Rajdhani');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     homeproviderTrue = Provider.of(context,listen: true);
     homeproviderFalse = Provider.of(context,listen: false);
+
+
     return SafeArea(child: Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -40,11 +51,12 @@ class _homeState extends State<home> {
             ),
             SizedBox(height: 20,),
             ElevatedButton(onPressed: () async {
+              print("===============================================");
+              print(homeproviderTrue!.trainData[0].name);
               String search=txtsearch.text;
-              String? msg=await homeproviderFalse!.postapicall(search);
-              print('$msg');
-
+              homeproviderTrue!.trainData = await homeproviderFalse!.postApi(search);
             }, child: Text("Submit"),),
+            // Text('${homeproviderTrue!.trainData[0].name}'),
           ],
         ),
       ),
